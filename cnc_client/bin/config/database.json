@@ -1,0 +1,6 @@
+﻿{
+"LogFileName":"c://manlog.log",
+"ConnectionString":"Driver={Microsoft Paradox Driver (*.db )};DriverID=282;FIL=Paradox 4.x;DBQ=c:\\;ReadOnly=1",
+"CNCName":"CNC_01",
+"RefreshPeriod":"2000"
+}
