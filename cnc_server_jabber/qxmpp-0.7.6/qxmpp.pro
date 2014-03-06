@@ -7,7 +7,7 @@ SUBDIRS = src
 
 android {
 } else {
-    SUBDIRS += doc#tests examples doc
+    SUBDIRS += examples #tests examples doc
     INSTALLS += htmldocs
 }
 

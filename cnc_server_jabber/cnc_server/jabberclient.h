@@ -20,6 +20,7 @@ public slots:
     void rosterReceived();
     void presenceChanged(const QString& bareJid, const QString& resource);
     void sendToAll(QByteArray msg, QString cncName, QDate errDate, QString errTime);
+    void onMessageReceived(QXmppMessage msg);
 
 private:
     QString nowStr();
