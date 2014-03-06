@@ -43,22 +43,21 @@ CncDataSender::CncDataSender(QObject *parent) :
 
     QVariantMap result = QtJson::parse(jsonData, ok).toMap();
 
-    if(ok) {
-        if(result.contains("ConnectionString")) {
-            connecionString = result.value("ConnectionString").toString();
-        }
-        if(result.contains("LogFileName")) {
-            logFileName = result.value("LogFileName").toString();
-        }
-        if(result.contains("RefreshPeriod")) {
-            refreshPeriod = result.value("RefreshPeriod").toString().toInt();
-        }
-        if(result.contains("CNCName")) {
-            cncName = result.value("CNCName").toString();
+    if(ok) {       
+        foreach(QVariant key, result.keys()) {
+            if(key.toString().toLower()=="connectionstring")
+                connecionString = result.value(key.toString()).toString();
+            if(key.toString().toLower()=="logfilename")
+                logFileName = result.value(key.toString()).toString();
+            if(key.toString().toLower()=="refreshperiod")
+                refreshPeriod = result.value(key.toString()).toString().toInt();
+            if(key.toString().toLower()=="cncname")
+                cncName = result.value(key.toString()).toString();
         }
     }
 
 
+    writeToConsole("CNCName=\""+cncName+"\"");
     writeToConsole("ConnecionString=\""+connecionString+"\"");
     writeToConsole("LogFileName=\""+logFileName+"\"");
     writeToConsole(QString("Errol list count = %1").arg(errorList.count()));
