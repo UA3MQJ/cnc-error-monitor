@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     // For google talk
     // client.connectToServer("username@gmail.com", "passwd");
 
-    client.connectToServer("rzp_asutp@jabber.ru", "********");
+    client.connectToServer("****@jabber.ru", "********");
 
     return app.exec();
 }
