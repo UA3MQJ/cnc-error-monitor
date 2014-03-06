@@ -24,6 +24,7 @@ JabberClient::JabberClient(QObject *parent)
     connect(this, SIGNAL(connected()), SLOT(clientConnected()));
     connect(&this->rosterManager(), SIGNAL(rosterReceived()), SLOT(rosterReceived()));
     connect(&this->rosterManager(), SIGNAL(presenceChanged(QString,QString)), SLOT(presenceChanged(QString,QString)));
+    connect(this, SIGNAL(messageReceived(QXmppMessage)), SLOT(onMessageReceived(QXmppMessage)));
 }
 
 void JabberClient::connectToJabber(QString user, QString pass)
@@ -90,5 +91,15 @@ void JabberClient::sendToAll(QByteArray msg, QString cncName, QDate errDate, QSt
     foreach(QString userName, sendList) {
         this->sendMessage(userName, "CNC_NAME: "+ cncName +  "\n" +
                                     errDate.toString("yyyy-MM-dd ")+ errTime + "\nMesage:\n" + messageToUser);
+    }
+}
+
+void JabberClient::onMessageReceived(QXmppMessage msg)
+{
+    if(msg.body().length()>0) {
+        qDebug() << nowStr() << "onMessageReceived" << msg.from() << msg.body();
+        foreach(QString userName, sendList) {
+            this->sendMessage(userName, msg.from() + ">\n" + msg.body());
+        }
     }
 }

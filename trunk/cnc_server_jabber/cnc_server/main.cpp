@@ -25,11 +25,11 @@ int main(int argc, char *argv[])
     QString pass;
 
     if(ok) {
-        if(result.contains("user")) {
-            user = result.value("user").toString();
-        }
-        if(result.contains("pass")) {
-            pass = result.value("pass").toString();
+        foreach(QVariant key, result.keys()) {
+            if(key.toString().toLower()=="user")
+                user = result.value(key.toString()).toString();
+            if(key.toString().toLower()=="pass")
+                pass = result.value(key.toString()).toString();
         }
     }
 
